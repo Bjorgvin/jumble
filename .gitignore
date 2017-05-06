@@ -38,3 +38,6 @@ jspm_packages
 
 # remove .DS_Store banished!
 .DS_Store
+
+# no uploading build folder
+build
