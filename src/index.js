@@ -6,9 +6,10 @@ import { createStore, compose, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 
 import createRoutes from './routes.js'
-import createBrowserHistory from 'history/createBrowserHistory'
 
 import reducers from './reducers'
+
+import history from './history'
 
 import sagas from './sagas'
 const sagaMiddleware = createSagaMiddleware()
@@ -24,7 +25,6 @@ const store = createStore(
 sagaMiddleware.run(sagas)
 
 
-const history = createBrowserHistory()
 const routes = createRoutes(history)
 
 ReactDOM.render(

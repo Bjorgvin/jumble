@@ -19,7 +19,11 @@ class Overview extends Component {
             {jumblelist}
           </div>);
       } else {
-        return <div>You don't have any jumbles yet :)</div>
+        return (
+          <div>
+            <p>You don't have any jumbles yet :)</p>
+            <Link to='/jumble/new'>Add a jumble</Link>
+          </div>)
       }
     } else {
       return (<div>loading jumbles</div>)
