@@ -8,6 +8,14 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case type.fetchJumblesResolved:
       return { jumbles: action.payload.jumbles }
+    case type.saveJumble:
+      return Object.assign({}, state, {
+        saving: true,
+      })
+    case type.saveJumbleResolved:
+      return Object.assign({}, state, {
+        saving: false,
+      })
     default:
       return state
   }
@@ -16,6 +24,7 @@ export default (state = initialState, action) => {
 const select = state => state.platform.jumbles
 
 // selectors
+export const savingJumble = state => select(state).saving
 export const getJumbles = state => select(state).jumbles
 export const getJumble = (state,id) => {
   const jumbles = getJumbles(state)
