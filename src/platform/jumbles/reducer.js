@@ -2,20 +2,41 @@ import { type } from './actions'
 
 const initialState = {
   jumbles: undefined,
+  deleting: [],
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case type.fetchJumblesResolved:
-      return { jumbles: action.payload.jumbles }
+      return Object.assign({},
+        state,
+        { jumbles: action.payload.jumbles }
+      )
     case type.saveJumble:
-      return Object.assign({}, state, {
-        saving: true,
-      })
+      return Object.assign({},
+        state,
+        { saving: true }
+      )
     case type.saveJumbleResolved:
-      return Object.assign({}, state, {
-        saving: false,
-      })
+      return Object.assign({},
+        state,
+        { saving: false }
+      )
+    case type.deleteJumble:
+      const deleting = [...state.deleting, action.payload.id]
+      return Object.assign({},
+        state,
+        { deleting: deleting }
+      )
+    case type.deleteJumbleResolved:
+      const id = action.payload.id
+      const jumbleList = state.jumbles.filter(item=>item.id!==id)
+      const newDeleting = state.deleting.filter(anId=>anId!==id)
+      return Object.assign({},
+          state,
+          {jumbles: jumbleList},
+          {deleting: newDeleting}
+        )
     default:
       return state
   }
@@ -24,6 +45,7 @@ export default (state = initialState, action) => {
 const select = state => state.platform.jumbles
 
 // selectors
+export const deletingJumbles = (state) => select(state).deleting
 export const savingJumble = state => select(state).saving
 export const getJumbles = state => select(state).jumbles
 export const getJumble = (state,id) => {
