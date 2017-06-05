@@ -15,12 +15,18 @@ export default (state = initialState, action) => {
     case type.saveJumble:
       return Object.assign({},
         state,
-        { saving: true }
+        {
+          newId: undefined,
+          saving: true,
+        }
       )
     case type.saveJumbleResolved:
       return Object.assign({},
         state,
-        { saving: false }
+        {
+          newId: action.payload.id,
+          saving: false,
+        }
       )
     case type.deleteJumble:
       const deleting = [...state.deleting, action.payload.id]
@@ -47,6 +53,7 @@ const select = state => state.platform.jumbles
 // selectors
 export const deletingJumbles = (state) => select(state).deleting
 export const savingJumble = state => select(state).saving
+export const getNewJumbleId = state => select(state).newId
 export const getJumbles = state => select(state).jumbles
 export const getJumble = (state,id) => {
   const jumbles = getJumbles(state)
