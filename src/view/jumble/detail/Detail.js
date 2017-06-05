@@ -5,7 +5,13 @@ class Detail extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {pin: ''};
+    this.state = {
+      pin:'',
+      first: -1,
+      second: -1,
+      third: -1,
+      fourth: -1,
+    };
     this.pinChange = this.pinChange.bind(this)
   }
 
@@ -18,12 +24,16 @@ class Detail extends Component {
     let pin = event.target.value
     if(!isNaN(pin)) {
       pin = pin.slice(0,4)
+      const first = pin.slice(0,1)
+      const second = pin.slice(1,2)
+      const third =  pin.slice(2,3)
+      const fourth = pin.slice(3,4)
       this.setState({
         pin:pin,
-        first: pin.slice(0,1),
-        second: pin.slice(1,2),
-        third: pin.slice(2,3),
-        fourth: pin.slice(3,4),
+        first: first===''?-1:Number(first),
+        second: second===''?-1:Number(second),
+        third: third===''?-1:Number(third),
+        fourth: fourth===''?-1:Number(fourth),
       })
     }
   }

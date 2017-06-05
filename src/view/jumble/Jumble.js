@@ -14,42 +14,82 @@ class Jumble extends Component {
 
   render() {
     const { name, jumble, first, second, third, fourth } = this.props
-    let prefix
+
     let password
-    let postfix
     if(first && second && third && fourth) {
-      let begin = Number(first + second)
-      let end = Number(third + fourth)
+      let begin = Number(`${first}${second}`)
+      let end = Number(`${third}${fourth}`)
       const reverse = begin > end
       if(reverse){
         const tmp = end
         end = begin
         begin = tmp
       }
-      prefix = jumble.slice(0,begin)
       password = jumble.slice(begin,end+1)
       password = reverse ? password.split('').reverse().join('') : password
-      postfix = jumble.slice(end+1)
+    }
+
+    const columnsHeaders = [(<td key={`ch${0}`}></td>)]
+    for (var k = 0; k < 10; k++) {
+      columnsHeaders.push(
+        <td key={`ch${k+1}`}>{k===second?`s(${k})`:k===fourth?`f(${k})`:k}</td>
+      )
+    }
+    const columnsHeadersRow = (<tr>{columnsHeaders}</tr>)
+    const rows = []
+    for (var i = 0; i < 10; i++) {
+      const chars = jumble.slice(i*10,(i*10)+10)
+      const columns = [
+        <td key={`rc${i}`}>{i===first?`f(${i})`:i===third?`t(${i})`:i}</td>
+      ]
+      for (var j = 0; j < chars.length; j++) {
+        if(first===i) {
+          // this is one of the first digits
+          columns.push(
+            <td key={`c${j}`}>{`f(${chars[j]})`}</td>
+          )
+        } else if(third===i){
+          // this is one of the third digits
+          columns.push(
+            <td key={`c${j}`}>{`t(${chars[j]})`}</td>
+          )
+        } else if(second===j) {
+          // this is one of the second digits
+          columns.push(
+            <td key={`c${j}`}>{`s(${chars[j]})`}</td>
+          )
+        } else if(fourth===j) {
+          // this is one of the fourth digits
+          columns.push(
+            <td key={`c${j}`}>{`f(${chars[j]})`}</td>
+          )
+        } else {
+          // none of the pin digits match
+          columns.push(
+            <td key={`c${j}`}>{`${chars[j]}`}</td>
+          )
+        }
+      }
+      const style = first===i?{background:'blue'}:(third===i?{background:'red'}:{background:'white'})
+      rows.push(<tr style={style} key={`r${i}`}>{columns}</tr>)
     }
 
     return (
       <div>
-        {name && <div>name: {name}</div>}
+        <p>{name}</p>
+        <table>
+          <tbody>
+            {columnsHeadersRow}
+            {rows}
+          </tbody>
+        </table>
         {password &&
-          <div>
-            <div>prefix: {prefix}</div>
-            <div>password: <strong>{password}</strong></div>
-            <div>postfix: {postfix}</div>
-          </div>
+          <input
+            type='button'
+            onClick={()=>this.copy(password)}
+            value='copy'
+          />
         }
-        {jumble && !password &&
-          <div>Jumble: {jumble}</div>
-        }
-        {password && <input
-          type='button'
-          onClick={()=>this.copy(password)}
-          value='copy'
-       />}
       </div>
     )
   }
