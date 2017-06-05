@@ -13,13 +13,15 @@ class New extends Component {
     this.onGenerate = this.onGenerate.bind(this)
   }
 
-  componentWillMount(){
+  componentWillMount() {
     // initiate the compnent by generating a jumble
     this.onGenerate()
+    // internal state indicating we are in the state
+    // of creating a new jumble
+    this.setState({ new: true })
   }
 
-  makeJumble(length, characters)
-  {
+  makeJumble(length, characters) {
     const chars=[]
     for( var i=0; i < length; i++ ) {
       const rand = Math.floor(Math.random() * characters.length)
@@ -38,6 +40,9 @@ class New extends Component {
     if(!values.jumbleName) {
       throw new SubmissionError({jumbleName: 'name empty',_error: 'name not filled in!'})
     }
+    // When we are submiting a new jumble it is no
+    // longer a new one
+    this.setState({ new: false })
     saveJumble(values.jumbleName, values.jumble)
   }
 
@@ -46,8 +51,27 @@ class New extends Component {
       handleSubmit,
       saveJumble,
       saving,
+      newId,
+      history,
     } = this.props
-    if(saving) return <div>saving...</div>
+
+    if(!this.state.new && newId) {
+      // if we are not in the state of creating a new
+      // jumble, started submiting, and we have a new
+      // Id we should navigate to the new id :)
+      setTimeout(()=>{
+        // navigate to the new Jumble
+        history.push(`/jumble/${newId}`)
+      },100)
+      // prevent blinking while stalling for 100 ms
+      return <div>saving...</div>
+    }
+
+    if(saving) {
+      // we are in the process of saving a new jumble
+      return <div>saving...</div>
+    }
+
     const jumbleField =  ({input, label})   => {
       return (
         <div>
@@ -60,6 +84,7 @@ class New extends Component {
         </div>
       )
     }
+    
     const renderField = ({input, label, type, meta: {touched, error, warning}}) => (
       <div>
         <label>{label}</label>

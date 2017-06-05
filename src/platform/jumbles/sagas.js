@@ -1,7 +1,6 @@
 import { put, fork, call, takeEvery, select } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 import { getJumbles } from './reducer'
-import history from '../../history'
 
 import {
   fetchJumblesResolved,
@@ -38,7 +37,6 @@ export function* onSaveJumble(action) {
   })
   if(localStorage) localStorage.setItem('jumbles', JSON.stringify(jumbleList));
   yield put(saveJumbleResolved(newId))
-  yield call(history.push, `/jumble/${newId}`)
 }
 
 export function* onDeleteJumble(action) {
