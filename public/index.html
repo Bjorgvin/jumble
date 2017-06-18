@@ -4,6 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <!-- Add manifest -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <!-- Tell the browser it's a PWA -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <!-- Tell iOS it's a PWA -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Make sure theme-color is defined -->
+    <meta name="theme-color" content="#536878">
     <!--
       Notice the use of %PUBLIC_URL% in the tag above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -16,7 +24,12 @@
     <title>React App</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div role='main' id="root">
+      <div>
+        <h2>Jumble</h2>
+      </div>
+      <p>loading Jumble :)</p>
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -27,5 +40,22 @@
       To begin the development, run `npm start`.
       To create a production bundle, use `npm run build`.
     -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+            // Registration was successful
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          }, function(err) {
+            // registration failed :(
+            console.log('ServiceWorker registration failed: ', err);
+          }).catch(function(err) {
+            console.log(err)
+          });
+        });
+      } else {
+        console.log('service worker is not supported');
+      }
+    </script>
   </body>
 </html>
