@@ -1,0 +1,25 @@
+.name-field-container {
+  display: flex;
+  justify-content: center;
+}
+
+.action-panel {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.action-button {
+  width:100px;
+  margin-left: 15px;
+}
+
+.input-error{
+  border:none;
+  border-width: 1px;
+  border-color: red;
+}
+.input-warning{
+  border:none;
+  border-width: 1px;
+  border-color: yellow;
+}
