@@ -5,6 +5,8 @@ import { Provider } from 'react-redux'
 import { createStore, compose, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 
+import './app.css'
+
 import createRoutes from './routes.js'
 
 import reducers from './reducers'
@@ -29,7 +31,11 @@ const routes = createRoutes(history)
 
 ReactDOM.render(
   <Provider store={ store } >
-    { routes }
+    <div className='app-container'>
+      <div className='app-content'>
+        { routes }
+      </div>
+    </div>
   </Provider>,
   document.getElementById('root')
 );

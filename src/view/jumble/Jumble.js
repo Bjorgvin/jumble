@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import clipboard from 'clipboard-js'
+import './jumble.css'
 
 class Jumble extends Component {
 
   constructor(props) {
     super(props)
+
     this.copy = this.copy.bind(this)
   }
 
@@ -14,7 +16,6 @@ class Jumble extends Component {
 
   render() {
     const { name, jumble, first, second, third, fourth } = this.props
-
     let password
     if(first && second && third && fourth) {
       let begin = Number(`${first}${second}`)
@@ -31,8 +32,9 @@ class Jumble extends Component {
 
     const columnsHeaders = [(<td key={`ch${0}`}></td>)]
     for (var k = 0; k < 10; k++) {
+      const cname = k===second?'selected-first':k===fourth?'selected-second ':''
       columnsHeaders.push(
-        <td key={`ch${k+1}`}>{k===second?`s(${k})`:k===fourth?`f(${k})`:k}</td>
+        <td className={cname} key={`ch${k+1}`}>{k===second?`${k}`:k===fourth?`${k}`:k}</td>
       )
     }
     const columnsHeadersRow = (<tr>{columnsHeaders}</tr>)
@@ -40,28 +42,29 @@ class Jumble extends Component {
     for (var i = 0; i < 10; i++) {
       const chars = jumble.slice(i*10,(i*10)+10)
       const columns = [
-        <td key={`rc${i}`}>{i===first?`f(${i})`:i===third?`t(${i})`:i}</td>
+        <td key={`rc${i}`}>{i===first?`${i}`:i===third?`${i}`:i}</td>
       ]
       for (var j = 0; j < chars.length; j++) {
+
         if(first===i) {
           // this is one of the first digits
           columns.push(
-            <td key={`c${j}`}>{`f(${chars[j]})`}</td>
+            <td className='selected-first' key={`c${j}`}>{`${chars[j]}`}</td>
           )
         } else if(third===i){
           // this is one of the third digits
           columns.push(
-            <td key={`c${j}`}>{`t(${chars[j]})`}</td>
+            <td className='selected-second' key={`c${j}`}>{`${chars[j]}`}</td>
           )
         } else if(second===j) {
           // this is one of the second digits
           columns.push(
-            <td key={`c${j}`}>{`s(${chars[j]})`}</td>
+            <td className='selected-first' key={`c${j}`}>{`${chars[j]}`}</td>
           )
         } else if(fourth===j) {
           // this is one of the fourth digits
           columns.push(
-            <td key={`c${j}`}>{`f(${chars[j]})`}</td>
+            <td className='selected-second' key={`c${j}`}>{`${chars[j]}`}</td>
           )
         } else {
           // none of the pin digits match
@@ -70,25 +73,30 @@ class Jumble extends Component {
           )
         }
       }
-      const style = first===i?{background:'blue'}:(third===i?{background:'red'}:{background:'white'})
-      rows.push(<tr style={style} key={`r${i}`}>{columns}</tr>)
+      const cname = first===i?'selected-first':(third===i?'selected-second':'')
+      rows.push(<tr className={cname} key={`r${i}`}>{columns}</tr>)
     }
 
     return (
       <div>
-        <p>{name}</p>
-        <table>
-          <tbody>
-            {columnsHeadersRow}
-            {rows}
-          </tbody>
-        </table>
+        {name && <div className='jumble-name center'>{name}</div>}
+        <div className='center'>
+          <table className='jumble-table'>
+            <tbody>
+              {columnsHeadersRow}
+              {rows}
+            </tbody>
+          </table>
+        </div>
         {password &&
-          <input
-            type='button'
-            onClick={()=>this.copy(password)}
-            value='copy'
-          />
+          <div className='action-panel'>
+            <input
+              className='action-button'
+              type='button'
+              onClick={()=>this.copy(password)}
+              value='copy'
+            />
+          </div>
         }
       </div>
     )

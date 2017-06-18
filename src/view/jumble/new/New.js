@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Field, SubmissionError } from 'redux-form'
+import './new.css'
 import Jumble from '../Jumble'
                // 7MdgwfJltjRZHW63qFIzrsh1Vk9bpXcPTAOnGui4YvQBEmDUx2aKSo8ye0CNL5
 const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -75,27 +76,27 @@ class New extends Component {
     const jumbleField =  ({input, label})   => {
       return (
         <div>
-          <label>{label}</label>
-          <div>
-            <Jumble jumble={input.value}/>
-          </div>
+          {/* <label>{label}</label> */}
+          <Jumble jumble={input.value}/>
           <br/>
-          <input type='button' onClick={this.onGenerate} value='Regenerate' />
         </div>
       )
     }
-    
-    const renderField = ({input, label, type, meta: {touched, error, warning}}) => (
-      <div>
-        <label>{label}</label>
+
+    const renderField = ({input, label, type, meta: {touched, error, warning}}) => {
+      const cname = touched?(error?'input-error':null):(warning?'input-warning':null)
+      return (
         <div>
-          <input {...input} placeholder={label} type={type} />
-          {touched &&
-            ((error && <span>{error}</span>) ||
-              (warning && <span>{warning}</span>))}
+          {/* <label>{label}</label> */}
+          <div className='name-field-container'>
+            <input className={cname} {...input} placeholder={label} type={type} />
+            {touched &&
+              ((error && <span>{error}</span>) ||
+                (warning && <span>{warning}</span>))}
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
 
     return (
       <form onSubmit={handleSubmit((values) => this.onSubmit(values, saveJumble))}>
@@ -111,7 +112,10 @@ class New extends Component {
           label='Jumble'
           component={jumbleField}
         />
-        <button type="submit">Save</button>
+        <div className='action-panel'>
+          <input className='action-button' type='button' onClick={this.onGenerate} value='Regenerate' />
+          <button className='action-button' type="submit">Save</button>
+        </div>
       </form>)
   }
 }
