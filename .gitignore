@@ -41,3 +41,6 @@ jspm_packages
 
 # no uploading build folder
 build
+
+# ignore built css files
+src/**/*.css
