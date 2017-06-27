@@ -2,7 +2,7 @@
 var doCache = true;
 
 // Name our cache
-var CACHE_NAME = 'jumble-cache-v1';
+var CACHE_NAME = 'jumbles-cache-v1';
 
 // Delete old caches that are not our current one!
 self.addEventListener("activate", event => {
@@ -30,6 +30,7 @@ self.addEventListener('install', function(event) {
           // This is because webpack hashes it
           fetch("asset-manifest.json")
             .then(response => {
+              console.log(response);
               response.json()
             })
             .then(assets => {

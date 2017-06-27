@@ -61,7 +61,7 @@ class New extends Component {
       // Id we should navigate to the new id :)
       setTimeout(()=>{
         // navigate to the new Jumble
-        history.push(`/jumble/${newId}`)
+        history.push(`/jumbles/${newId}`)
       },100)
       // prevent blinking while stalling for 100 ms
       return <div>saving...</div>
@@ -84,7 +84,7 @@ class New extends Component {
         </div>
       )
     }
-    
+
     const renderField = ({input, label, type, meta: {touched, error, warning}}) => (
       <div>
         <label>{label}</label>
