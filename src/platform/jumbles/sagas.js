@@ -47,8 +47,6 @@ export function* onDeleteJumble(action) {
   jumbleList = jumbleList.filter(item=>item.id!==id)
   if(localStorage) localStorage.setItem('jumbles', JSON.stringify(jumbleList));
   yield put(deleteJumbleResolved(id))
-  // make sure we go to the list of jumbles
-  yield call(history.push, `/jumble`)
 }
 
 export default function* () {
