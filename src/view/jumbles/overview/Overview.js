@@ -17,7 +17,7 @@ class Overview extends Component {
           return (
               <div key={j.id}>
                 {delThis && <span>{j.name}</span>}
-                {!delThis && <Link to={`/jumble/${j.id}`}>{j.name}</Link> }
+                {!delThis && <Link to={`/jumbles/${j.id}`}>{j.name}</Link> }
                 <input
                   type='button'
                   onClick={() => deleteJumble(j.id)}
@@ -37,7 +37,7 @@ class Overview extends Component {
         return (
           <div>
             <p>You don't have any jumbles yet :)</p>
-            <Link to='/jumble/new'>Add a jumble</Link>
+            <Link to='/jumbles/new'>Add a jumble</Link>
           </div>)
       }
     } else {
