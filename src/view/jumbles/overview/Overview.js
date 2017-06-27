@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import { root } from '../routes'
 
 class Overview extends Component {
 
@@ -17,7 +18,7 @@ class Overview extends Component {
           return (
               <div key={j.id}>
                 {delThis && <span>{j.name}</span>}
-                {!delThis && <Link to={`/jumbles/${j.id}`}>{j.name}</Link> }
+                {!delThis && <Link to={`${root}/${j.id}`}>{j.name}</Link> }
                 <input
                   type='button'
                   onClick={() => deleteJumble(j.id)}
@@ -37,7 +38,7 @@ class Overview extends Component {
         return (
           <div>
             <p>You don't have any jumbles yet :)</p>
-            <Link to='/jumbles/new'>Add a jumble</Link>
+            <Link to={`${root}/new`}>Add a jumble</Link>
           </div>)
       }
     } else {

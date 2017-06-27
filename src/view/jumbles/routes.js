@@ -5,11 +5,12 @@ import Overview from './overview'
 import Detail from './detail'
 import New from './new'
 
-const root = 'jumbles'
+export const root = '/jumbles'
+
 export default (
   [
-    <Route key='new' path='/jumbles/new' component={New} back={`/${root}/overview`} />,
-    <Route key='detail' path='/jumbles/:jumble' component={Detail} back={`/${root}/overview`} />,
-    <Route key='overview' path='/jumbles' component={Overview} />
+    <Route key='new' path={`${root}/new`} component={New} back={`${root}/overview`} />,
+    <Route key='detail' path={`${root}/:jumble`} component={Detail} back={`${root}/overview`} />,
+    <Route key='overview' path={`${root}`} component={Overview} />
   ]
 )
