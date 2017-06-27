@@ -12,7 +12,7 @@ class Overview extends Component {
     const { jumbles } = this.props
     if(jumbles) {
       if(jumbles.length > 0) {
-        const jumblelist = jumbles.map(j => <Link key={j.id} to={`/jumble/${j.id}`}>{j.id}</Link>)
+        const jumblelist = jumbles.map(j => <Link key={j.id} to={`/jumbles/${j.id}`}>{j.id}</Link>)
         return (
           <div>
             <h1>Jumbles</h1>
