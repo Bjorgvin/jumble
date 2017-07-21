@@ -88,13 +88,7 @@ class New extends Component {
     }
 
     const jumbleField = ({ input, label }) => {
-      return (
-        <div>
-          {/* <label>{label}</label> */}
-          <Jumble jumble={input.value} />
-          <br />
-        </div>
-      )
+      return <Jumble jumble={input.value} />
     }
 
     const renderField = ({

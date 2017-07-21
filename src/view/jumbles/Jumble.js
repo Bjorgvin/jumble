@@ -1,14 +1,24 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import clipboard from 'clipboard-js'
 import { ActionButton } from './components/buttons.js'
 import { Center, ActionPanel } from './components/containers.js'
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`
 
 // default styling for all columns
 const Td = styled.td`
   width: 25px;
   height: 25px;
   padding: 5px;
+  animation: 0.5s ${fadeIn} ease-out;
 `
 
 // style for column marked by the second digit
@@ -20,7 +30,10 @@ const TdFourth = styled(Td)`
   background:${props => props.theme.green};
 `
 // styling for rows
-const Tr = styled.tr`background: white;`
+const Tr = styled.tr`
+  background: white;
+  animation: 0.5s ${fadeIn} ease-out;
+`
 // styling for row marked by the first digit
 const TrFirst = styled(Tr)`
   background:${props => props.theme.yellow};
