@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { Center } from '../components/containers.js'
+import { Center } from '../../components/containers.js'
 
 const Input = styled.input`
   order: 2;

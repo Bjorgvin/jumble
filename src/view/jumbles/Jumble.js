@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import styled, { keyframes } from 'styled-components'
 import clipboard from 'clipboard-js'
-import { ActionButton } from './components/buttons.js'
-import { Center, ActionPanel } from './components/containers.js'
+import { ActionButton } from '../components/buttons.js'
+import { Center, ActionPanel } from '../components/containers.js'
 
 const fadeIn = keyframes`
   0% {
@@ -154,10 +154,9 @@ class Jumble extends Component {
         {password &&
           <ActionPanel>
             <ActionButton
-              className="action-button"
               type="button"
               onClick={() => this.copy(password)}
-              value="copy"
+              value="Copy"
             />
           </ActionPanel>}
       </div>

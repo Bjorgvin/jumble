@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import Jumble from '../Jumble'
 import Pin from './Pin'
+import { TextPanel } from '../../components/containers.js'
+import { HeaderText } from '../../components/texts.js'
 
 class Detail extends Component {
-
   constructor(props) {
     super(props)
-    this.state = {first: -1,second: -1,third: -1,fourth: -1}
+    this.state = { first: -1, second: -1, third: -1, fourth: -1 }
     this.onPinChange = this.onPinChange.bind(this)
   }
 
@@ -28,7 +29,7 @@ class Detail extends Component {
     const { match, getJumble } = this.props
     const jumbleId = match.params.jumble
     const jumble = getJumble(jumbleId)
-    if(jumble) {
+    if (jumble) {
       return (
         <div>
           <Pin onPinChange={this.onPinChange} />
@@ -43,10 +44,22 @@ class Detail extends Component {
         </div>
       )
     } else {
-      if(jumble === undefined) {
-        return (<div>loading jumble {jumbleId}</div>)
-      } else if(jumble === null) {
-        return (<div>Jumble {jumbleId} does not exist</div>)
+      if (jumble === undefined) {
+        return (
+          <TextPanel>
+            <HeaderText>
+              Loading jumble {jumbleId}
+            </HeaderText>
+          </TextPanel>
+        )
+      } else if (jumble === null) {
+        return (
+          <TextPanel>
+            <HeaderText>
+              Jumble {jumbleId} does not exist
+            </HeaderText>
+          </TextPanel>
+        )
       }
     }
   }

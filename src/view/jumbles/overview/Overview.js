@@ -1,29 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import styled, { keyframes } from 'styled-components'
 import { root } from '../routes'
-import { ActionButton } from '../components/buttons.js'
-import { ListPair } from '../components/containers.js'
-
-const fadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-`
-
-const Panel = styled.div`
-  text-align: cneter;
-  width: 400px;
-`
-
-const HeaderText = styled.h1`
-  font-size: 30px;
-  text-align: center;
-  animation: 2s ${fadeIn} ease-out;
-`
+import { ActionButton } from '../../components/buttons.js'
+import { ListPair, TextPanel } from '../../components/containers.js'
+import { HeaderText } from '../../components/texts.js'
 
 class Overview extends Component {
   componentWillMount() {
@@ -51,33 +31,33 @@ class Overview extends Component {
               <ActionButton
                 type="button"
                 onClick={() => deleteJumble(j.id)}
-                value="delete"
+                value="Delete"
                 disabled={deletingItem}
               />
             </ListPair>
           )
         })
         return (
-          <Panel>
+          <TextPanel>
             <HeaderText>Jumbles</HeaderText>
             {jumblelist}
-          </Panel>
+          </TextPanel>
         )
       } else {
         return (
-          <Panel>
+          <TextPanel>
             <HeaderText>
               <p>You don't have any jumbles yet :)</p>
               <Link to={`${root}/new`}>Add a jumble</Link>
             </HeaderText>
-          </Panel>
+          </TextPanel>
         )
       }
     } else {
       return (
-        <Panel>
+        <TextPanel>
           <HeaderText>loading jumbles</HeaderText>
-        </Panel>
+        </TextPanel>
       )
     }
   }

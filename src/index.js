@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import styled, { ThemeProvider } from 'styled-components'
-import normalize from './styles/global.js'
+import styled, { ThemeProvider, injectGlobal } from 'styled-components'
+import { normalize } from 'polished'
 import { Provider } from 'react-redux'
 import { createStore, compose, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
@@ -28,7 +28,7 @@ sagaMiddleware.run(sagas)
 const routes = createRoutes(history)
 
 // set up the normalize
-normalize()
+;(() => injectGlobal`${normalize()}`)()
 
 const AppContainer = styled.div`
   display: flex;

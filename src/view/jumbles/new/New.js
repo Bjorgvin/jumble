@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Field, SubmissionError } from 'redux-form'
 import styled from 'styled-components'
-import { ActionButton } from '../components/buttons.js'
-import { ActionPanel } from '../components/containers.js'
+import { ActionButton } from '../../components/buttons.js'
+import { ActionPanel } from '../../components/containers.js'
 
 import Jumble from '../Jumble'
 // 7MdgwfJltjRZHW63qFIzrsh1Vk9bpXcPTAOnGui4YvQBEmDUx2aKSo8ye0CNL5
@@ -155,7 +155,7 @@ class New extends Component {
             onClick={this.onGenerate}
             value="Regenerate"
           />
-          <ActionButton type="submit" value="save" />
+          <ActionButton type="submit" value="Save" />
         </ActionPanel>
       </form>
     )
