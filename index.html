@@ -27,7 +27,7 @@
 })(window.location)</script><link href="https://fonts.googleapis.com/css?family=Overpass" rel="stylesheet"><title>React App</title></head><body><div role="main" id="root"><div><h2>Jumbles</h2></div><p>loading Jumbles :)</p></div><script>if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
     navigator.serviceWorker
-      .register('/service-worker.js')
+      .register('service-worker.js')
       .then(
         function(registration) {
           // Registration was successful
