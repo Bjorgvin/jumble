@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import Jumble from '../Jumble'
+import Pin from './Pin'
+import { TextPanel } from '../../components/containers.js'
+import { HeaderText } from '../../components/texts.js'
 
 class Detail extends Component {
-
   constructor(props) {
     super(props)
-    this.state = {pin: ''};
-    this.pinChange = this.pinChange.bind(this)
+    this.state = { first: -1, second: -1, third: -1, fourth: -1 }
+    this.onPinChange = this.onPinChange.bind(this)
   }
 
   componentWillMount() {
@@ -14,35 +16,23 @@ class Detail extends Component {
     fetchJumbles()
   }
 
-  pinChange(event) {
-    let pin = event.target.value
-    if(!isNaN(pin)) {
-      pin = pin.slice(0,4)
-      this.setState({
-        pin:pin,
-        first: pin.slice(0,1),
-        second: pin.slice(1,2),
-        third: pin.slice(2,3),
-        fourth: pin.slice(3,4),
-      })
-    }
+  onPinChange(first, second, third, fourth) {
+    this.setState({
+      first: first,
+      second: second,
+      third: third,
+      fourth: fourth,
+    })
   }
 
   render() {
     const { match, getJumble } = this.props
     const jumbleId = match.params.jumble
     const jumble = getJumble(jumbleId)
-    if(jumble) {
+    if (jumble) {
       return (
         <div>
-          <div>
-            pin selector
-            <input
-              type='text'
-              value={this.state.pin}
-              onChange={this.pinChange}
-            />
-          </div>
+          <Pin onPinChange={this.onPinChange} />
           <Jumble
             name={jumble.name}
             jumble={jumble.jumble}
@@ -54,10 +44,22 @@ class Detail extends Component {
         </div>
       )
     } else {
-      if(jumble === undefined) {
-        return (<div>loading jumble {jumbleId}</div>)
-      } else if(jumble === null) {
-        return (<div>Jumble {jumbleId} does not exist</div>)
+      if (jumble === undefined) {
+        return (
+          <TextPanel>
+            <HeaderText>
+              Loading jumble {jumbleId}
+            </HeaderText>
+          </TextPanel>
+        )
+      } else if (jumble === null) {
+        return (
+          <TextPanel>
+            <HeaderText>
+              Jumble {jumbleId} does not exist
+            </HeaderText>
+          </TextPanel>
+        )
       }
     }
   }
