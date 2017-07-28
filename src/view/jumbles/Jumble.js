@@ -3,6 +3,7 @@ import styled, { keyframes } from 'styled-components'
 import clipboard from 'clipboard-js'
 import { ActionButton } from '../components/buttons.js'
 import { Center, ActionPanel } from '../components/containers.js'
+import { media } from '../../style-utils'
 
 const fadeIn = keyframes`
   0% {
@@ -17,6 +18,11 @@ const fadeIn = keyframes`
 const Td = styled.td`
   width: 25px;
   height: 25px;
+  ${media.handheld`
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+  `};
   padding: 5px;
   animation: 0.5s ${fadeIn} ease-out;
 `
