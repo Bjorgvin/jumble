@@ -1,8 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { root } from '../routes'
+import { ActionButton } from '../../components/buttons.js'
+import { ListPair, TextPanel } from '../../components/containers.js'
+import { HeaderText } from '../../components/texts.js'
 
 class Overview extends Component {
-
   componentWillMount() {
     const { fetchJumbles } = this.props
     fetchJumbles()
@@ -10,38 +13,52 @@ class Overview extends Component {
 
   render() {
     const { jumbles, deleteJumble, deleting } = this.props
-    if(jumbles) {
-      if(jumbles.length > 0) {
+    if (jumbles) {
+      if (jumbles.length > 0) {
         const jumblelist = jumbles.map(j => {
-          const delThis = deleting.indexOf(j.id) >= 0
+          const deletingItem = deleting.indexOf(j.id) >= 0
+          const item = deletingItem
+            ? <span>
+                {j.name}
+              </span>
+            : <Link to={`${root}/${j.id}`}>
+                {j.name}
+              </Link>
+
           return (
-              <div key={j.id}>
-                {delThis && <span>{j.name}</span>}
-                {!delThis && <Link to={`/jumbles/${j.id}`}>{j.name}</Link> }
-                <input
-                  type='button'
-                  onClick={() => deleteJumble(j.id)}
-                  value='delete'
-                  disabled={deleting.indexOf(j.id) >= 0}
-                />
-              </div>
-            )
-          }
-        )
+            <ListPair key={j.id}>
+              {item}
+              <ActionButton
+                type="button"
+                onClick={() => deleteJumble(j.id)}
+                value="Delete"
+                disabled={deletingItem}
+              />
+            </ListPair>
+          )
+        })
         return (
-          <div>
-            <h1>Jumbles</h1>
+          <TextPanel>
+            <HeaderText>Jumbles</HeaderText>
             {jumblelist}
-          </div>);
+          </TextPanel>
+        )
       } else {
         return (
-          <div>
-            <p>You don't have any jumbles yet :)</p>
-            <Link to='/jumbles/new'>Add a jumble</Link>
-          </div>)
+          <TextPanel>
+            <HeaderText>
+              <p>You don't have any jumbles yet :)</p>
+              <Link to={`${root}/new`}>Add a jumble</Link>
+            </HeaderText>
+          </TextPanel>
+        )
       }
     } else {
-      return (<div>loading jumbles</div>)
+      return (
+        <TextPanel>
+          <HeaderText>loading jumbles</HeaderText>
+        </TextPanel>
+      )
     }
   }
 }

@@ -17,6 +17,6 @@ export const ActionPanel = styled.div`
   padding-top: 15px;
 `
 export const TextPanel = styled.div`
-  text-align: cneter;
-  width: 400px;
+  text-align: center;
+  width: 100%;
 `

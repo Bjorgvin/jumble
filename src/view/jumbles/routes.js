@@ -7,18 +7,10 @@ import New from './new'
 
 export const root = '/jumbles'
 
-export default [
-  <Route
-    key="new"
-    path={`${root}/new`}
-    component={New}
-    back={`${root}/overview`}
-  />,
-  <Route
-    key="detail"
-    path={`${root}/:jumble`}
-    component={Detail}
-    back={`${root}/overview`}
-  />,
-  <Route key="overview" path={`${root}`} component={Overview} />,
-]
+export default (
+  [
+    <Route key='new' path={`${root}/new`} component={New} back={`${root}/overview`} />,
+    <Route key='detail' path={`${root}/:jumble`} component={Detail} back={`${root}/overview`} />,
+    <Route key='overview' path={`${root}`} component={Overview} />
+  ]
+)
