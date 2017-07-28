@@ -1,10 +1,11 @@
 {
   "name": "jumbles",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "private": true,
   "homepage": "https://bjorgvin.github.io/jumbles",
   "dependencies": {
     "clipboard-js": "^0.3.3",
+    "polished": "^1.3.0",
     "react": "^15.5.4",
     "react-clipboard.js": "^1.1.2",
     "react-dom": "^15.5.4",
@@ -12,7 +13,8 @@
     "react-router-dom": "^4.1.1",
     "redux": "^3.6.0",
     "redux-form": "^6.7.0",
-    "redux-saga": "^0.14.6"
+    "redux-saga": "^0.14.6",
+    "styled-components": "^2.1.1"
   },
   "devDependencies": {
     "gh-pages": "^1.0.0",
