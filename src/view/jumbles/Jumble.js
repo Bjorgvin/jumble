@@ -75,9 +75,15 @@ class Jumble extends Component {
   render() {
     const { name, jumble, first, second, third, fourth } = this.props
     let password
-    if (first && second && third && fourth) {
+    if (
+      !isNaN(Number(first)) &&
+      !isNaN(Number(second)) &&
+      !isNaN(Number(third)) &&
+      !isNaN(Number(fourth))
+    ) {
       let begin = Number(`${first}${second}`)
       let end = Number(`${third}${fourth}`)
+
       const reverse = begin > end
       if (reverse) {
         const tmp = end
