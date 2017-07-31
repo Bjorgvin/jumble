@@ -83,6 +83,7 @@ class Jumble extends Component {
     ) {
       let begin = Number(`${first}${second}`)
       let end = Number(`${third}${fourth}`)
+
       const reverse = begin > end
       if (reverse) {
         const tmp = end

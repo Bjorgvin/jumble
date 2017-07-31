@@ -1,7 +1,8 @@
 {
   "name": "jumbles",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "private": true,
+  "homepage": "https://bjorgvin.github.io/jumbles",
   "dependencies": {
     "clipboard-js": "^0.3.3",
     "polished": "^1.3.0",
@@ -20,8 +21,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "npm run build-css && react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }
