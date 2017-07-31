@@ -32,6 +32,7 @@ const AppContainer = styled.div`
   font-size: 18px;
   font-family: 'Overpass', sans-serif;
 `
+
 const AppContent = styled.div`width: 100%;`
 
 const theme = {
