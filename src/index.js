@@ -32,11 +32,7 @@ const AppContainer = styled.div`
   font-size: 18px;
   font-family: 'Overpass', sans-serif;
 `
-<<<<<<< HEAD
 const AppContent = styled.div`width: 100%;`
-=======
-const AppContent = styled.div`max-width: 400px;`
->>>>>>> 00f2997a1e516c456a5469d47d53bff611061360
 
 const theme = {
   green: '#B3D56C',
