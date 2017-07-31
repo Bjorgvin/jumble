@@ -3,10 +3,7 @@ import styled, { keyframes } from 'styled-components'
 import clipboard from 'clipboard-js'
 import { ActionButton } from '../components/buttons.js'
 import { Center, ActionPanel } from '../components/containers.js'
-<<<<<<< HEAD
-=======
 import { media } from '../../style-utils'
->>>>>>> 00f2997a1e516c456a5469d47d53bff611061360
 
 const fadeIn = keyframes`
   0% {
@@ -21,14 +18,11 @@ const fadeIn = keyframes`
 const Td = styled.td`
   width: 25px;
   height: 25px;
-<<<<<<< HEAD
-=======
   ${media.handheld`
     width: 20px;
     height: 20px;
     font-size: 14px;
   `};
->>>>>>> 00f2997a1e516c456a5469d47d53bff611061360
   padding: 5px;
   animation: 0.5s ${fadeIn} ease-out;
 `
@@ -81,7 +75,12 @@ class Jumble extends Component {
   render() {
     const { name, jumble, first, second, third, fourth } = this.props
     let password
-    if (first && second && third && fourth) {
+    if (
+      !isNaN(Number(first)) &&
+      !isNaN(Number(second)) &&
+      !isNaN(Number(third)) &&
+      !isNaN(Number(fourth))
+    ) {
       let begin = Number(`${first}${second}`)
       let end = Number(`${third}${fourth}`)
       const reverse = begin > end
